@@ -108,24 +108,17 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 100px 60px 60px;
+            justify-content: space-between;
+            padding: 100px 80px 60px;
+            gap: 100px;
             color: white;
-        }
-
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 80px;
-            max-width: 1600px;
-            width: 100%;
-            margin: 0 auto;
             animation: fadeInUp 1s ease;
         }
 
         .hero-text {
             flex: 1;
             text-align: left;
+            max-width: 600px;
         }
 
         .hero-image {
@@ -133,7 +126,7 @@
         }
 
         .hero-image img {
-            height: 700px;
+            height: 750px;
             width: auto;
             border-radius: 30px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
@@ -494,14 +487,27 @@
         }
 
         /* Responsive */
+        @media (max-width: 1400px) {
+            .hero {
+                padding-left: 60px;
+                padding-right: 60px;
+                gap: 80px;
+            }
+
+            .hero-image img {
+                height: 650px;
+            }
+        }
+
         @media (max-width: 1024px) {
             .hero {
                 padding-left: 40px;
                 padding-right: 40px;
+                gap: 60px;
             }
 
-            .hero-content {
-                gap: 60px;
+            .hero-image img {
+                height: 600px;
             }
         }
 
@@ -512,9 +518,6 @@
 
             .hero {
                 padding: 100px 20px 60px;
-            }
-
-            .hero-content {
                 flex-direction: column;
                 gap: 40px;
             }
@@ -667,28 +670,26 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Your new favorite way to stay organized</h1>
-                <p class="subtitle">
-                    Plan your day, track your tasks, and get smart summaries without overthinking it.
-                </p>
-                <div>
-                    <div class="cta-buttons">
-                        <a href="#" class="btn btn-primary">
-                            <span>Download on App Store</span>
-                        </a>
-                        <a href="#features" class="btn btn-secondary">
-                            <span>Explore Features</span>
-                        </a>
-                    </div>
-                    <p class="cta-note">7-day free trial included</p>
+    <section class="hero hero-content">
+        <div class="hero-text">
+            <h1>Your new favorite way to stay organized</h1>
+            <p class="subtitle">
+                Plan your day, track your tasks, and get smart summaries without overthinking it.
+            </p>
+            <div>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span>Download on App Store</span>
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <span>Explore Features</span>
+                    </a>
                 </div>
+                <p class="cta-note">7-day free trial included</p>
             </div>
-            <div class="hero-image">
-                <img src="01.png" alt="NextAgenda App Screenshot">
-            </div>
+        </div>
+        <div class="hero-image">
+            <img src="01.png" alt="NextAgenda App Screenshot">
         </div>
     </section>
 
