@@ -107,13 +107,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding: 100px 20px 60px;
             color: white;
         }
 
         .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
             animation: fadeInUp 1s ease;
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero-image {
+            flex: 0 0 auto;
+        }
+
+        .hero-image img {
+            height: 700px;
+            width: auto;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
         }
 
         @keyframes fadeInUp {
@@ -190,30 +210,6 @@
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-3px);
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            opacity: 0.8;
-            font-size: 0.9em;
         }
 
         /* Features Section */
@@ -500,6 +496,19 @@
                 padding-top: 120px;
             }
 
+            .hero-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-image img {
+                height: 500px;
+            }
+
             .cta-buttons {
                 flex-direction: column;
             }
@@ -507,11 +516,6 @@
             .btn {
                 width: 100%;
                 max-width: 300px;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 20px;
             }
 
             .features-grid {
@@ -642,32 +646,22 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Your AI-Powered<br>Productivity Partner</h1>
-            <p class="subtitle">
-                Transform chaos into clarity with intelligent calendar management,
-                smart task tracking, and AI-powered insights.
-            </p>
-            <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">
-                    <span>Download on App Store</span>
-                </a>
-                <a href="#features" class="btn btn-secondary">
-                    <span>Explore Features</span>
-                </a>
+            <div class="hero-text">
+                <h1>Your new favorite way to stay organized</h1>
+                <p class="subtitle">
+                    Plan your day, track your tasks, and get smart summaries without overthinking it.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span>Download on App Store</span>
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <span>Explore Features</span>
+                    </a>
+                </div>
             </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">10k+</span>
-                    <span class="stat-label">Active Users</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">4.8★</span>
-                    <span class="stat-label">App Store Rating</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">50k+</span>
-                    <span class="stat-label">Tasks Completed</span>
-                </div>
+            <div class="hero-image">
+                <img src="01.png" alt="NextAgenda App Screenshot">
             </div>
         </div>
     </section>
