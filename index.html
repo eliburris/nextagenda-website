@@ -109,15 +109,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 100px 20px 60px;
+            padding: 100px 60px 60px;
             color: white;
         }
 
         .hero-content {
             display: flex;
             align-items: center;
-            gap: 60px;
-            max-width: 1200px;
+            gap: 80px;
+            max-width: 1600px;
+            width: 100%;
             margin: 0 auto;
             animation: fadeInUp 1s ease;
         }
@@ -493,13 +494,24 @@
         }
 
         /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+
+            .hero-content {
+                gap: 60px;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links a:not(.btn-primary) {
                 display: none;
             }
 
             .hero {
-                padding-top: 100px;
+                padding: 100px 20px 60px;
             }
 
             .hero-content {
