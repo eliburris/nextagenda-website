@@ -6,14 +6,15 @@
     <title>NextAgenda - Your AI-Powered Productivity Partner</title>
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
-            --accent: #ec4899;
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0ea5e9;
+            --accent: #06b6d4;
             --dark: #0f172a;
             --dark-light: #1e293b;
             --gray: #64748b;
             --light: #f8fafc;
+            --success: #10b981;
         }
 
         * {
@@ -30,71 +31,25 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
+        /* Clean Background */
         .bg-gradient {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
             z-index: -1;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating Shapes */
-        .shapes {
-            position: fixed;
+        .bg-gradient::after {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .shape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            animation: float 20s infinite;
-        }
-
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 5s;
-        }
-
-        .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            bottom: 10%;
-            left: 50%;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-50px) rotate(180deg); }
+            right: 0;
+            height: 50%;
+            background: radial-gradient(ellipse at top, rgba(37, 99, 235, 0.15), transparent);
         }
 
         /* Navigation */
@@ -124,6 +79,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            letter-spacing: -0.02em;
         }
 
         .nav-links a {
@@ -307,15 +263,17 @@
         }
 
         .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 18px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2em;
+            font-size: 1.5em;
             margin-bottom: 25px;
+            color: white;
+            font-weight: 600;
         }
 
         .feature-card h3 {
@@ -365,8 +323,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            height: 3px;
+            background: var(--primary);
         }
 
         .pricing-card:hover {
@@ -375,21 +333,23 @@
         }
 
         .pricing-card.featured {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: 3px solid rgba(255, 255, 255, 0.4);
+            background: var(--primary);
+            border: 2px solid var(--primary);
             transform: scale(1.15);
             flex: 0 0 360px;
-            box-shadow: 0 0 80px rgba(99, 102, 241, 0.6),
-                        0 0 120px rgba(139, 92, 246, 0.4),
-                        0 20px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(255, 255, 255, 0.1);
             z-index: 10;
+        }
+
+        .pricing-card.featured::before {
+            height: 0;
         }
 
         .pricing-card.featured:hover {
             transform: scale(1.18);
-            box-shadow: 0 0 100px rgba(99, 102, 241, 0.8),
-                        0 0 150px rgba(139, 92, 246, 0.6),
-                        0 25px 80px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4),
+                        0 0 0 1px rgba(255, 255, 255, 0.15);
         }
 
         .pricing-badge {
@@ -571,8 +531,7 @@
 
             .pricing-card.featured {
                 order: -1;
-                box-shadow: 0 0 40px rgba(99, 102, 241, 0.5),
-                            0 10px 30px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             }
 
             .footer-content {
@@ -585,6 +544,73 @@
             scroll-behavior: smooth;
         }
 
+        /* Screenshots Section */
+        .screenshots {
+            padding: 80px 20px;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .screenshots .section-header {
+            margin-bottom: 50px;
+        }
+
+        .screenshots .section-header h2 {
+            color: white;
+        }
+
+        .screenshots .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .screenshots-scroll {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) rgba(255, 255, 255, 0.1);
+        }
+
+        .screenshots-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .screenshot-item {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-item img {
+            height: 600px;
+            width: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .screenshot-item img {
+                height: 500px;
+            }
+        }
+
         /* Utilities */
         .text-gradient {
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -595,19 +621,13 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
+    <!-- Background -->
     <div class="bg-gradient"></div>
-    <div class="shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
 
     <!-- Navigation -->
     <nav>
         <div class="container">
             <a href="#" class="logo">
-                <span>📅</span>
                 <span>NextAgenda</span>
             </a>
             <div class="nav-links">
@@ -629,11 +649,9 @@
             </p>
             <div class="cta-buttons">
                 <a href="#" class="btn btn-primary">
-                    <span>📱</span>
                     <span>Download on App Store</span>
                 </a>
                 <a href="#features" class="btn btn-secondary">
-                    <span>✨</span>
                     <span>Explore Features</span>
                 </a>
             </div>
@@ -654,6 +672,33 @@
         </div>
     </section>
 
+    <!-- Screenshots Section -->
+    <section class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>See It In Action</h2>
+                <p>Beautiful, intuitive design that makes productivity effortless</p>
+            </div>
+            <div class="screenshots-scroll">
+                <div class="screenshot-item">
+                    <img src="01.png" alt="Next Level Planning - Welcome to NextAgenda">
+                </div>
+                <div class="screenshot-item">
+                    <img src="02.png" alt="Task Master - Organize and track tasks">
+                </div>
+                <div class="screenshot-item">
+                    <img src="03.png" alt="AI Recaps - Daily summaries powered by AI">
+                </div>
+                <div class="screenshot-item">
+                    <img src="04.png" alt="Plan Smarter - Calendar view">
+                </div>
+                <div class="screenshot-item">
+                    <img src="05.png" alt="Premium Features - Unlock unlimited power">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
@@ -664,37 +709,37 @@
 
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
+                    <div class="feature-icon">AI</div>
                     <h3>AI-Powered Summaries</h3>
                     <p>Get intelligent daily, weekly, and monthly insights about your schedule. Let AI help you understand your productivity patterns.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">📆</div>
+                    <div class="feature-icon">CAL</div>
                     <h3>Calendar Integration</h3>
                     <p>Seamlessly sync with Google Calendar and Apple Calendar. All your events in one beautiful, unified view.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">✅</div>
+                    <div class="feature-icon">TASK</div>
                     <h3>Smart Task Management</h3>
                     <p>Create, categorize, and prioritize tasks effortlessly. Never lose track of what needs to get done.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
+                    <div class="feature-icon">FOCUS</div>
                     <h3>Focus Mode</h3>
                     <p>Immersive focus sessions with beautiful backgrounds and customizable timers to boost your concentration.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
+                    <div class="feature-icon">DESIGN</div>
                     <h3>Beautiful Design</h3>
                     <p>Clean, modern interface with dark mode support and custom themes. A calendar app you'll love to open.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
+                    <div class="feature-icon">FAST</div>
                     <h3>Lightning Fast</h3>
                     <p>Built with performance in mind. Instant sync, smooth animations, and responsive interface.</p>
                 </div>
@@ -764,12 +809,12 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>📅 NextAgenda</h3>
+                    <h3>NextAgenda</h3>
                     <p>Your AI-powered productivity partner. Transform chaos into clarity with intelligent calendar management.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Twitter">𝕏</a>
-                        <a href="#" aria-label="Instagram">📷</a>
-                        <a href="#" aria-label="LinkedIn">in</a>
+                        <a href="#" aria-label="Twitter">X</a>
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
                     </div>
                 </div>
 
@@ -797,7 +842,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>© 2024 NextAgenda. All rights reserved. Made with ❤️ for productivity enthusiasts.</p>
+                <p>© 2024 NextAgenda. All rights reserved. Made for productivity enthusiasts.</p>
             </div>
         </div>
     </footer>
