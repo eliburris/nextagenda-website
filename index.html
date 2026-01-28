@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="application-name" content="NextAgenda"
-    <title>NextAgenda</title>
+    <title>NextAgenda - Your AI-Powered Productivity Partner</title>
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --gray: #64748b;
+            --light: #f8fafc;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,197 +23,732 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            color: var(--dark);
+            background: var(--dark);
+            overflow-x: hidden;
         }
 
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Shapes */
+        .shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 20px;
         }
 
-        header {
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 100px 20px 60px;
             color: white;
-            padding: 60px 0;
         }
 
-        h1 {
-            font-size: 3.5em;
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
             margin-bottom: 20px;
-            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .tagline {
-            font-size: 1.5em;
-            opacity: 0.9;
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
             margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .download-btn {
-            display: inline-block;
-            background: white;
-            color: #667eea;
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn {
             padding: 18px 40px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 10px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
         }
 
-        .download-btn:hover {
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
         }
 
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        /* Features Section */
         .features {
+            padding: 100px 20px;
+            background: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.2em;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin: 60px 0;
+            margin-top: 60px;
         }
 
         .feature-card {
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.1);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.15);
         }
 
         .feature-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            margin-bottom: 25px;
         }
 
         .feature-card h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 1.4em;
+            font-size: 1.5em;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
         .feature-card p {
-            color: #666;
-            line-height: 1.6;
+            color: var(--gray);
+            line-height: 1.8;
         }
 
-        .footer {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px 20px;
-            margin-top: 60px;
-            border-radius: 15px;
-            text-align: center;
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 20px;
+            background: var(--dark);
             color: white;
         }
 
-        .footer-links {
-            margin: 20px 0;
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 60px auto 0;
         }
 
-        .footer-links a {
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .plan-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .plan-price span {
+            font-size: 0.4em;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .plan-description {
+            opacity: 0.8;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-light);
             color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            margin: 0 15px;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
         }
 
-        .footer-links a:hover {
-            opacity: 1;
-            text-decoration: underline;
+        .footer-section a:hover {
+            color: white;
         }
 
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
+            nav .nav-links {
+                display: none;
             }
 
-            .tagline {
-                font-size: 1.2em;
+            .hero {
+                padding-top: 120px;
             }
 
-            .features {
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .features-grid,
+            .pricing-cards {
                 grid-template-columns: 1fr;
             }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Utilities */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>NextAgenda</h1>
-            <p class="tagline">Smart Calendar Management with AI-Powered Insights</p>
-            <div>
-                <a href="#" class="download-btn">📱 Download on App Store</a>
-            </div>
-        </header>
-
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>AI-Powered Summaries</h3>
-                <p>Get intelligent daily, weekly, and monthly overviews of your schedule with AI-generated insights.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">📆</div>
-                <h3>Google Calendar Sync</h3>
-                <p>Seamlessly connect and sync multiple Google calendars. Your events, all in one place.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">✅</div>
-                <h3>Smart Task Management</h3>
-                <p>Create, organize, and track tasks with categories and priorities. Stay on top of everything.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🔔</div>
-                <h3>Event Reminders</h3>
-                <p>Never miss an important event with smart notifications and customizable reminders.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>Beautiful Design</h3>
-                <p>Clean, modern interface with dark mode support. A calendar app you'll love to use.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightning Fast</h3>
-                <p>Built with performance in mind. Quick sync, instant updates, smooth animations.</p>
-            </div>
-        </div>
-
-        <div class="footer">
-            <h2>Get Started Today</h2>
-            <p style="margin: 20px 0; font-size: 1.1em;">
-                7-day free trial • $4.99/month after trial • Cancel anytime
-            </p>
-
-            <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-                <a href="mailto:support@nextagenda.app">Contact Support</a>
-            </div>
-
-            <p style="margin-top: 30px; opacity: 0.8;">
-                © 2024 NextAgenda. All rights reserved.
-            </p>
-        </div>
+    <!-- Animated Background -->
+    <div class="bg-gradient"></div>
+    <div class="shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
     </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <span>📅</span>
+                <span>NextAgenda</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="mailto:support@nextagenda.app">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your AI-Powered<br>Productivity Partner</h1>
+            <p class="subtitle">
+                Transform chaos into clarity with intelligent calendar management,
+                smart task tracking, and AI-powered insights.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">
+                    <span>📱</span>
+                    <span>Download on App Store</span>
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <span>✨</span>
+                    <span>Explore Features</span>
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">10k+</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4.8★</span>
+                    <span class="stat-label">App Store Rating</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50k+</span>
+                    <span class="stat-label">Tasks Completed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything You Need to <span class="text-gradient">Stay Organized</span></h2>
+                <p>Powerful features designed to make your life easier and more productive</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Summaries</h3>
+                    <p>Get intelligent daily, weekly, and monthly insights about your schedule. Let AI help you understand your productivity patterns.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📆</div>
+                    <h3>Calendar Integration</h3>
+                    <p>Seamlessly sync with Google Calendar and Apple Calendar. All your events in one beautiful, unified view.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Smart Task Management</h3>
+                    <p>Create, categorize, and prioritize tasks effortlessly. Never lose track of what needs to get done.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Focus Mode</h3>
+                    <p>Immersive focus sessions with beautiful backgrounds and customizable timers to boost your concentration.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful Design</h3>
+                    <p>Clean, modern interface with dark mode support and custom themes. A calendar app you'll love to open.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Built with performance in mind. Instant sync, smooth animations, and responsive interface.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that's right for you. Start with a 7-day free trial.</p>
+            </div>
+
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">$0<span>/month</span></div>
+                    <div class="plan-description">Perfect for getting started</div>
+                    <ul class="plan-features">
+                        <li><span class="check-icon">✓</span> Calendar view</li>
+                        <li><span class="check-icon">✓</span> Up to 15 active tasks</li>
+                        <li><span class="check-icon">✓</span> 1 calendar connection</li>
+                        <li><span class="check-icon">✓</span> 5 task categories</li>
+                        <li><span class="check-icon">✓</span> Basic focus mode</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; justify-content: center; margin-top: 20px;">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">MOST POPULAR</div>
+                    <div class="plan-name">Premium Monthly</div>
+                    <div class="plan-price">$4.99<span>/month</span></div>
+                    <div class="plan-description">7-day free trial, cancel anytime</div>
+                    <ul class="plan-features">
+                        <li><span class="check-icon">✓</span> Everything in Free</li>
+                        <li><span class="check-icon">✓</span> Unlimited AI summaries</li>
+                        <li><span class="check-icon">✓</span> Unlimited tasks</li>
+                        <li><span class="check-icon">✓</span> Unlimited calendars</li>
+                        <li><span class="check-icon">✓</span> Custom themes</li>
+                        <li><span class="check-icon">✓</span> Premium focus backgrounds</li>
+                        <li><span class="check-icon">✓</span> Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 20px;">Start Free Trial</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-badge">BEST VALUE</div>
+                    <div class="plan-name">Premium Annual</div>
+                    <div class="plan-price">$45<span>/year</span></div>
+                    <div class="plan-description">Save 25% with annual billing</div>
+                    <ul class="plan-features">
+                        <li><span class="check-icon">✓</span> Everything in Premium</li>
+                        <li><span class="check-icon">✓</span> 2 months free</li>
+                        <li><span class="check-icon">✓</span> Early access to features</li>
+                        <li><span class="check-icon">✓</span> Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; justify-content: center; margin-top: 20px;">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📅 NextAgenda</h3>
+                    <p>Your AI-powered productivity partner. Transform chaos into clarity with intelligent calendar management.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">𝕏</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#">Updates</a>
+                    <a href="#">Roadmap</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="#">EULA</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="mailto:support@nextagenda.app">Contact Support</a>
+                    <a href="#">Help Center</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 NextAgenda. All rights reserved. Made with ❤️ for productivity enthusiasts.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
