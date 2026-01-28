@@ -59,7 +59,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 100px;
+            padding: 0 120px;
         }
 
         .logo {
@@ -109,9 +109,9 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 120px 100px 80px;
-            gap: 120px;
+            justify-content: center;
+            padding: 140px 120px 100px;
+            gap: 60px;
             color: white;
             animation: fadeInUp 1s ease;
         }
@@ -119,7 +119,7 @@
         .hero-text {
             flex: 1;
             text-align: left;
-            max-width: 700px;
+            max-width: none;
         }
 
         .hero-image {
@@ -127,15 +127,16 @@
         }
 
         .hero-image img {
-            height: 850px;
+            height: 90vh;
+            max-height: 950px;
             width: auto;
             border-radius: 35px;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
         }
 
         .cta-note {
-            margin-top: 20px;
-            font-size: 1.05em;
+            margin-top: 24px;
+            font-size: 1.15em;
             color: rgba(255, 255, 255, 0.5);
             font-weight: 400;
         }
@@ -152,20 +153,20 @@
         }
 
         .hero h1 {
-            font-size: clamp(3.5rem, 7vw, 5.5rem);
+            font-size: clamp(4rem, 8vw, 6.5rem);
             font-weight: 700;
-            margin-bottom: 32px;
-            line-height: 1.1;
+            margin-bottom: 40px;
+            line-height: 1.05;
             color: white;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
 
         .hero .subtitle {
-            font-size: clamp(1.35rem, 3vw, 1.75rem);
-            margin-bottom: 48px;
-            opacity: 0.75;
-            max-width: 600px;
-            line-height: 1.5;
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            margin-bottom: 56px;
+            opacity: 0.8;
+            max-width: 680px;
+            line-height: 1.45;
             color: white;
             font-weight: 400;
         }
@@ -177,15 +178,15 @@
         }
 
         .btn {
-            padding: 20px 40px;
-            border-radius: 50px;
+            padding: 24px 48px;
+            border-radius: 60px;
             text-decoration: none;
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 600;
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             border: none;
             cursor: pointer;
         }
@@ -492,11 +493,12 @@
             .hero {
                 padding-left: 80px;
                 padding-right: 80px;
-                gap: 100px;
+                gap: 50px;
             }
 
             .hero-image img {
-                height: 750px;
+                height: 85vh;
+                max-height: 850px;
             }
         }
 
@@ -504,11 +506,20 @@
             .hero {
                 padding-left: 60px;
                 padding-right: 60px;
-                gap: 80px;
+                gap: 40px;
+            }
+
+            .hero h1 {
+                font-size: clamp(3.5rem, 7vw, 5.5rem);
+            }
+
+            .hero .subtitle {
+                font-size: clamp(1.4rem, 3vw, 1.8rem);
             }
 
             .hero-image img {
-                height: 700px;
+                height: 80vh;
+                max-height: 800px;
             }
         }
 
@@ -516,19 +527,20 @@
             .hero {
                 padding-left: 40px;
                 padding-right: 40px;
-                gap: 60px;
+                gap: 40px;
             }
 
             .hero h1 {
-                font-size: clamp(2.5rem, 6vw, 3.5rem);
+                font-size: clamp(2.8rem, 6vw, 4rem);
             }
 
             .hero .subtitle {
-                font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+                font-size: clamp(1.25rem, 2.5vw, 1.6rem);
             }
 
             .hero-image img {
-                height: 600px;
+                height: 70vh;
+                max-height: 700px;
             }
         }
 
